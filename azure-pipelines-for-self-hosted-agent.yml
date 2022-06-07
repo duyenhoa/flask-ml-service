@@ -5,8 +5,8 @@ trigger:
 pool: myAgentPool
 
 variables:
-  # TODO: Replace the service connection name
-  azureServiceConnectionId: 'myserviceconn197760'
+  # TODO: Replace the service connection name 
+  azureServiceConnectionId: 'UdacityDS - 24'
   
   # TODO: Replace 'mywebapp193576' with the existing Web App name
   webAppName: 'myfirstwebapphoa'
@@ -16,6 +16,10 @@ variables:
 
   # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
+  resourceGroupName: 'Azuredevops'
+  package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+  runtimeStack: 'PYTHON|3.8'
+  startUpCommand: 'python app.py'
 
 stages:
 - stage: Build
@@ -66,5 +70,8 @@ stages:
             displayName: 'Deploy Azure Web App : flask-ml-service'
             inputs:
               azureSubscription: $(azureServiceConnectionId)
+              resourceGroupName: $(resourceGroupName)
               appName: $(webAppName)
-              package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+              package: $(package)
+              startUpCommand: $(startUpCommand)
+            
