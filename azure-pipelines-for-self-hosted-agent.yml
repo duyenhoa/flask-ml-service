@@ -1,14 +1,3 @@
-- task: AzureWebApp@1
-  inputs:
-    appType: 'webAppLinux'
-    appName: 'myfirstwebapphoa'
-    deployToSlotOrASE: true
-    resourceGroupName: 'Azuredevops'
-    slotName: 'production'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    runtimeStack: 'PYTHON|3.8'
-    startUpCommand: 'python app.py'
-
 trigger:
 - master
 
