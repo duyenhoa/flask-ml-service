@@ -1,3 +1,14 @@
+- task: AzureWebApp@1
+  inputs:
+    appType: 'webAppLinux'
+    appName: 'myfirstwebapphoa'
+    deployToSlotOrASE: true
+    resourceGroupName: 'Azuredevops'
+    slotName: 'production'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    runtimeStack: 'PYTHON|3.8'
+    startUpCommand: 'python app.py'
+
 trigger:
 - master
 
@@ -6,10 +17,10 @@ pool: myAgentPool
 
 variables:
   # TODO: Replace the service connection name
-  azureServiceConnectionId: 'udacity-pipeline'
+  azureServiceConnectionId: 'myserviceconn197760'
   
   # TODO: Replace 'mywebapp193576' with the existing Web App name
-  webAppName: 'MyFirstProject'
+  webAppName: 'myfirstwebapphoa'
 
   # Environment name
   environmentName: 'flask-ml-service'
@@ -25,9 +36,9 @@ stages:
     pool: myAgentPool
     steps:    
     - script: |
-        python3.7 -m pip install --upgrade pip
-        python3.7 -m pip install setup
-        python3.7 -m pip install -r requirements.txt
+        python3.8 -m pip install --upgrade pip
+        python3.8 -m pip install setup
+        python3.8 -m pip install -r requirements.txt
       workingDirectory: $(projectRoot)
 
     - script: |
